@@ -4,25 +4,29 @@
 
 import sys
 from rn2483 import Rn2483
-from sys_cmd import SysCmd
 
 def main():
     port = sys.argv[1]
     modem = Rn2483(port)
-    sys_cmd = SysCmd(modem)
 
     print(f"Connected to {modem.open()}\n")
-    print(sys_cmd.get_version())
+    print(modem.system.get_version())
 
     print("Module sleeping for 2000 ms...")
-    print(sys_cmd.sleep(2000))
+    print(modem.system.sleep(2000))
 
     # User-available EEPROM starts at address 768 and ends at 1023.
-    #print(sys_cmd.eeprom_save(768, 2))
-    #print(sys_cmd.eeprom_read(768))
+    #print(modem.system.eeprom_save(768, 2))
+    #print(modem.system.eeprom_read(768))
 
-    print(f"VDD (mV): {sys_cmd.get_voltage()}")
-    print(f"Hardware EUI: {sys_cmd.get_hweui()}")
+    print(f"VDD (mV): {modem.system.get_voltage()}")
+    print(f"Hardware EUI: {modem.system.get_hweui()}")
+
+    print(f"Frequency (Hz): {modem.radio.get_freq()}") 
+    print(f"Transmit output power (dBm): {modem.radio.get_pwr()}")
+
+    # The mac pause command must be called before any radio transmission
+    # or reception, even if no MAC operations have been initiated before.
 
     modem.close()
 

@@ -1,5 +1,8 @@
 import serial
 import sys
+from sys_cmd import SysCmd
+from lorawan_cmd import LorawanCmd
+from radio_cmd import RadioCmd
 
 class Rn2483:
     """Library for RN2483 modules from Microchip."""
@@ -11,6 +14,10 @@ class Rn2483:
         self.ser.bytesize = 8
         self.ser.parity = 'N'
         self.ser.stopbits = 1
+        
+        self.system = SysCmd(self)
+        self.lorawan = LorawanCmd(self)
+        self.radio = RadioCmd(self)
 
     def open(self):
         '''Open the serial communication.'''

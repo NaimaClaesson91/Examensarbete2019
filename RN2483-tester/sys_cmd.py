@@ -1,4 +1,6 @@
-class SysCmd():
+class SysCmd:
+    '''RN2483 System commands.'''
+
     def __init__(self, modem):
         self.modem = modem
 
