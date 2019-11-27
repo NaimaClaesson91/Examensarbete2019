@@ -22,11 +22,13 @@ def main():
     print(f"VDD (mV): {modem.system.get_voltage()}")
     print(f"Hardware EUI: {modem.system.get_hweui()}")
 
-    print(f"Frequency (Hz): {modem.radio.get_freq()}") 
+    print(f"Frequency (Hz): {modem.radio.get_freq()}")
     print(f"Transmit output power (dBm): {modem.radio.get_pwr()}")
 
     # The mac pause command must be called before any radio transmission
     # or reception, even if no MAC operations have been initiated before.
+
+    print(f"Module status: {modem.lorawan.get_status()}")
 
     modem.close()
 

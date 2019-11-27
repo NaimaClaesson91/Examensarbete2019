@@ -70,72 +70,72 @@ class RadioCmd:
 
     def get_afcbw(self):
         '''Get the value used by the automatic frequency correction bandwidth.'''
-        return self.modem.send_cmd(f"radio get afcbw")
+        return self.modem.send_cmd("radio get afcbw")
 
     def get_bitrate(self):
         '''Get the frequency shift keying (FSK) bit rate.'''
-        return self.modem.send_cmd(f"radio get bitrate")
+        return self.modem.send_cmd("radio get bitrate")
 
     def get_bt(self):
         '''Get the data shaping for FSK modulation type.'''
-        return self.modem.send_cmd(f"radio get bt")
+        return self.modem.send_cmd("radio get bt")
 
     def get_bw(self):
         '''Get the value used for the radio bandwidth.'''
-        return self.modem.send_cmd(f"radio get bw")
+        return self.modem.send_cmd("radio get bw")
 
     def get_cr(self):
         '''Get the coding rate used by the radio.'''
-        return self.modem.send_cmd(f"radio get cr")
+        return self.modem.send_cmd("radio get cr")
 
     def get_crc(self):
         '''Get if a CRC header is to be used.'''
-        return self.modem.send_cmd(f"radio get crc")
+        return self.modem.send_cmd("radio get crc")
 
     def get_fdev(self):
         '''Get the frequency deviation allowed by the end device.'''
-        return self.modem.send_cmd(f"radio get fdev")
+        return self.modem.send_cmd("radio get fdev")
 
     def get_freq(self):
         '''Get the current operation frequency for the radio.'''
-        return self.modem.send_cmd(f"radio get freq")
+        return self.modem.send_cmd("radio get freq")
 
     def get_iqi(self):
         '''Get if IQ inversion is used.'''
-        return self.modem.send_cmd(f"radio get iqi")
+        return self.modem.send_cmd("radio get iqi")
 
     def get_mod(self):
         '''Get the module Modulation mode.'''
-        return self.modem.send_cmd(f"radio get mod")
+        return self.modem.send_cmd("radio get mod")
 
     def get_prlen(self):
         '''Get the preamble length used during transmissions.'''
-        return self.modem.send_cmd(f"radio get prlen")
+        return self.modem.send_cmd("radio get prlen")
 
     def get_pwr(self):
         '''Get the output power level used by the radio during transmission.'''
-        return self.modem.send_cmd(f"radio get pwr")
+        return self.modem.send_cmd("radio get pwr")
 
     def get_rssi(self):
         '''Get the RSSI value from the last received frame.'''
-        return self.modem.send_cmd(f"radio get rssi")
+        return self.modem.send_cmd("radio get rssi")
 
     def get_rxbw(self):
         '''Get the operational receive bandwidth.'''
-        return self.modem.send_cmd(f"radio get rxbw")
+        return self.modem.send_cmd("radio get rxbw")
 
     def get_sf(self):
         '''Get the requested spreading factor to be used during transmission.'''
-        return self.modem.send_cmd(f"radio get sf")
+        return self.modem.send_cmd("radio get sf")
 
     def get_snr(self):
-        '''Get the signal-to-noise radio (SNR) of the last received packet.'''
-        return self.modem.send_cmd(f"radio get snr")
+        '''Get the signal-to-noise ratio (SNR) of the last received packet.'''
+        return self.modem.send_cmd("radio get snr")
 
     def get_sync(self):
         '''Get the syncronization word used for communication.'''
-        return self.modem.send_cmd(f"radio get sync")
+        return self.modem.send_cmd("radio get sync")
 
     def get_wdt(self):
         '''Get the time-out limit for the Watchdog Timer.'''
-        return self.modem.send_cmd(f"radio get wdt")
+        return self.modem.send_cmd("radio get wdt")

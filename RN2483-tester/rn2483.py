@@ -14,7 +14,7 @@ class Rn2483:
         self.ser.bytesize = 8
         self.ser.parity = 'N'
         self.ser.stopbits = 1
-        
+
         self.system = SysCmd(self)
         self.lorawan = LorawanCmd(self)
         self.radio = RadioCmd(self)
