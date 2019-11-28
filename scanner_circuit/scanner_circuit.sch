@@ -1,0 +1,377 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L MCU_Microchip_ATmega:ATmega328P-PU U?
+U 1 1 5DDFE659
+P 2000 2900
+F 0 "U?" H 1356 2946 50  0000 R CNN
+F 1 "ATmega328P-PU" H 1356 2855 50  0000 R CNN
+F 2 "Package_DIP:DIP-28_W7.62mm" H 2000 2900 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 2000 2900 50  0001 C CNN
+	1    2000 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R?
+U 1 1 5DE0188A
+P 5550 1600
+F 0 "R?" H 5609 1646 50  0000 L CNN
+F 1 "10k" H 5609 1555 50  0000 L CNN
+F 2 "" H 5550 1600 50  0001 C CNN
+F 3 "~" H 5550 1600 50  0001 C CNN
+	1    5550 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R?
+U 1 1 5DE01EEA
+P 5050 1600
+F 0 "R?" H 5109 1646 50  0000 L CNN
+F 1 "10k" H 5109 1555 50  0000 L CNN
+F 2 "" H 5050 1600 50  0001 C CNN
+F 3 "~" H 5050 1600 50  0001 C CNN
+	1    5050 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:2N7000 Q?
+U 1 1 5DE0277B
+P 5300 2000
+F 0 "Q?" V 5500 1850 50  0000 L CNN
+F 1 "2N7000" V 5600 1850 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 5500 1925 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/2N/2N7000.pdf" H 5300 2000 50  0001 L CNN
+	1    5300 2000
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:CP_Small C?
+U 1 1 5DE04B7B
+P 3300 5400
+F 0 "C?" H 3388 5446 50  0000 L CNN
+F 1 "100uF" H 3388 5355 50  0000 L CNN
+F 2 "" H 3300 5400 50  0001 C CNN
+F 3 "~" H 3300 5400 50  0001 C CNN
+	1    3300 5400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5DE050C0
+P 3850 5400
+F 0 "C?" H 3942 5446 50  0000 L CNN
+F 1 "100nF" H 3942 5355 50  0000 L CNN
+F 2 "" H 3850 5400 50  0001 C CNN
+F 3 "~" H 3850 5400 50  0001 C CNN
+	1    3850 5400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5DE056AB
+P 3100 2700
+F 0 "C?" H 3192 2746 50  0000 L CNN
+F 1 "22pF" H 3192 2655 50  0000 L CNN
+F 2 "" H 3100 2700 50  0001 C CNN
+F 3 "~" H 3100 2700 50  0001 C CNN
+	1    3100 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5DE05E80
+P 3500 2700
+F 0 "C?" H 3592 2746 50  0000 L CNN
+F 1 "22pF" H 3592 2655 50  0000 L CNN
+F 2 "" H 3500 2700 50  0001 C CNN
+F 3 "~" H 3500 2700 50  0001 C CNN
+	1    3500 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5DE06C46
+P 5050 1350
+F 0 "#PWR?" H 5050 1200 50  0001 C CNN
+F 1 "+3.3V" H 5065 1523 50  0000 C CNN
+F 2 "" H 5050 1350 50  0001 C CNN
+F 3 "" H 5050 1350 50  0001 C CNN
+	1    5050 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5VP #PWR?
+U 1 1 5DE071B5
+P 3300 5200
+F 0 "#PWR?" H 3300 5050 50  0001 C CNN
+F 1 "+5VP" H 3315 5373 50  0000 C CNN
+F 2 "" H 3300 5200 50  0001 C CNN
+F 3 "" H 3300 5200 50  0001 C CNN
+	1    3300 5200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DE0733B
+P 5300 3700
+F 0 "#PWR?" H 5300 3450 50  0001 C CNN
+F 1 "GND" H 5305 3527 50  0000 C CNN
+F 2 "" H 5300 3700 50  0001 C CNN
+F 3 "" H 5300 3700 50  0001 C CNN
+	1    5300 3700
+	1    0    0    -1  
+$EndComp
+$Comp
+L scanner_components:FGPMMOPA6H(gps) MOD?
+U 1 1 5DE0B476
+P 6500 3850
+F 0 "MOD?" H 6778 3896 50  0000 L CNN
+F 1 "FGPMMOPA6H(gps)" H 6778 3805 50  0000 L CNN
+F 2 "" H 6500 3950 50  0001 C CNN
+F 3 "" H 6500 3950 50  0001 C CNN
+	1    6500 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5VP #PWR?
+U 1 1 5DE101B7
+P 3850 5200
+F 0 "#PWR?" H 3850 5050 50  0001 C CNN
+F 1 "+5VP" H 3865 5373 50  0000 C CNN
+F 2 "" H 3850 5200 50  0001 C CNN
+F 3 "" H 3850 5200 50  0001 C CNN
+	1    3850 5200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DE10855
+P 3300 5550
+F 0 "#PWR?" H 3300 5300 50  0001 C CNN
+F 1 "GND" H 3305 5377 50  0000 C CNN
+F 2 "" H 3300 5550 50  0001 C CNN
+F 3 "" H 3300 5550 50  0001 C CNN
+	1    3300 5550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DE10A74
+P 3850 5550
+F 0 "#PWR?" H 3850 5300 50  0001 C CNN
+F 1 "GND" H 3855 5377 50  0000 C CNN
+F 2 "" H 3850 5550 50  0001 C CNN
+F 3 "" H 3850 5550 50  0001 C CNN
+	1    3850 5550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3300 5200 3300 5300
+Wire Wire Line
+	3300 5500 3300 5550
+Wire Wire Line
+	3850 5200 3850 5300
+Wire Wire Line
+	3850 5500 3850 5550
+$Comp
+L power:GND #PWR?
+U 1 1 5DE14567
+P 2000 4450
+F 0 "#PWR?" H 2000 4200 50  0001 C CNN
+F 1 "GND" H 2005 4277 50  0000 C CNN
+F 2 "" H 2000 4450 50  0001 C CNN
+F 3 "" H 2000 4450 50  0001 C CNN
+	1    2000 4450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2000 4400 2000 4450
+Wire Wire Line
+	2600 2300 2900 2300
+Wire Wire Line
+	2900 2300 2900 2200
+Wire Wire Line
+	2900 2200 3100 2200
+Wire Wire Line
+	2600 2400 2900 2400
+Wire Wire Line
+	2900 2400 2900 2500
+Wire Wire Line
+	2900 2500 3100 2500
+$Comp
+L Device:Crystal Y?
+U 1 1 5DE0333B
+P 3100 2350
+F 0 "Y?" V 3054 2481 50  0000 L CNN
+F 1 "Crystal" V 3145 2481 50  0000 L CNN
+F 2 "" H 3100 2350 50  0001 C CNN
+F 3 "~" H 3100 2350 50  0001 C CNN
+	1    3100 2350
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3100 2500 3100 2600
+Connection ~ 3100 2500
+Wire Wire Line
+	3500 2600 3500 2200
+Wire Wire Line
+	3500 2200 3100 2200
+Connection ~ 3100 2200
+$Comp
+L power:GND #PWR?
+U 1 1 5DE1A03F
+P 3300 2850
+F 0 "#PWR?" H 3300 2600 50  0001 C CNN
+F 1 "GND" H 3305 2677 50  0000 C CNN
+F 2 "" H 3300 2850 50  0001 C CNN
+F 3 "" H 3300 2850 50  0001 C CNN
+	1    3300 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3100 2800 3300 2800
+Wire Wire Line
+	3300 2800 3300 2850
+Wire Wire Line
+	3500 2800 3300 2800
+Connection ~ 3300 2800
+$Comp
+L power:+5VP #PWR?
+U 1 1 5DE1CDE5
+P 2000 1150
+F 0 "#PWR?" H 2000 1000 50  0001 C CNN
+F 1 "+5VP" H 2015 1323 50  0000 C CNN
+F 2 "" H 2000 1150 50  0001 C CNN
+F 3 "" H 2000 1150 50  0001 C CNN
+	1    2000 1150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2000 1150 2000 1200
+Wire Wire Line
+	2000 1200 2100 1200
+Wire Wire Line
+	2100 1200 2100 1400
+Connection ~ 2000 1200
+Wire Wire Line
+	2000 1200 2000 1400
+$Comp
+L Device:R_Small R?
+U 1 1 5DE1E226
+P 2900 3200
+F 0 "R?" V 3000 3150 50  0000 L CNN
+F 1 "10k" V 2800 3100 50  0000 L CNN
+F 2 "" H 2900 3200 50  0001 C CNN
+F 3 "~" H 2900 3200 50  0001 C CNN
+	1    2900 3200
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2600 3200 2800 3200
+$Comp
+L power:+5VP #PWR?
+U 1 1 5DE1FC14
+P 3650 3200
+F 0 "#PWR?" H 3650 3050 50  0001 C CNN
+F 1 "+5VP" H 3665 3373 50  0000 C CNN
+F 2 "" H 3650 3200 50  0001 C CNN
+F 3 "" H 3650 3200 50  0001 C CNN
+	1    3650 3200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3000 3200 3650 3200
+$Comp
+L power:+5VP #PWR?
+U 1 1 5DE22651
+P 5550 1350
+F 0 "#PWR?" H 5550 1200 50  0001 C CNN
+F 1 "+5VP" H 5565 1523 50  0000 C CNN
+F 2 "" H 5550 1350 50  0001 C CNN
+F 3 "" H 5550 1350 50  0001 C CNN
+	1    5550 1350
+	1    0    0    -1  
+$EndComp
+Text GLabel 4950 2100 0    50   Input ~ 0
+GPS_TX
+Text GLabel 5800 3850 0    50   Input ~ 0
+GPS_TX
+Text GLabel 5700 2100 2    50   Input ~ 0
+UNO_RX
+Text GLabel 2850 3700 2    50   Input ~ 0
+UNO_RX
+Wire Wire Line
+	2600 3700 2850 3700
+Wire Wire Line
+	4950 2100 5050 2100
+Wire Wire Line
+	5500 2100 5550 2100
+Wire Wire Line
+	5800 3850 5900 3850
+Wire Wire Line
+	5050 1700 5050 2100
+Connection ~ 5050 2100
+Wire Wire Line
+	5050 2100 5100 2100
+Wire Wire Line
+	5550 1350 5550 1500
+Wire Wire Line
+	5550 1700 5550 2100
+Connection ~ 5550 2100
+Wire Wire Line
+	5550 2100 5700 2100
+Wire Wire Line
+	5300 1800 5300 1400
+Wire Wire Line
+	5300 1400 5050 1400
+Wire Wire Line
+	5050 1350 5050 1400
+Connection ~ 5050 1400
+Wire Wire Line
+	5050 1400 5050 1500
+Wire Wire Line
+	5300 3700 5300 3650
+$Comp
+L power:+5VP #PWR?
+U 1 1 5DE2B064
+P 5300 3500
+F 0 "#PWR?" H 5300 3350 50  0001 C CNN
+F 1 "+5VP" H 5315 3673 50  0000 C CNN
+F 2 "" H 5300 3500 50  0001 C CNN
+F 3 "" H 5300 3500 50  0001 C CNN
+	1    5300 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5300 3650 5900 3650
+Wire Wire Line
+	5900 3550 5300 3550
+Wire Wire Line
+	5300 3550 5300 3500
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5DE2DD5D
+P 5300 4250
+F 0 "#PWR?" H 5300 4100 50  0001 C CNN
+F 1 "+3.3V" H 5315 4423 50  0000 C CNN
+F 2 "" H 5300 4250 50  0001 C CNN
+F 3 "" H 5300 4250 50  0001 C CNN
+	1    5300 4250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5300 4250 5900 4250
+$EndSCHEMATC
