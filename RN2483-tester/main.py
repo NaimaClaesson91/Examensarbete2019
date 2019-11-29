@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-'''Simple application for testing RN2483 modules from Microchip.'''
+'''Application for testing RN2483 modules from Microchip.'''
 
 import sys
 from rn2483 import Rn2483
@@ -20,11 +20,13 @@ def main():
     print(f"Connected to {modem.open()}\n")
     print(modem.system.get_version())
 
+    ttn.configure_frequency_plan()
+
     print("Attempting join by ABP... ", end="")
     print(ttn.join_abp(dev_address, nwk_session_key, app_session_key))
 
     print("Transmitting... ", end="")
-    print(ttn.transmit("CD1E09B900F401099E7FFF"))
+    print(ttn.transmit_unconfirmed_packet("CD1E09B900F401099E7FFF"))
 
     #print("Module sleeping for 2000 ms...")
     #print(modem.system.sleep(2000))

@@ -241,9 +241,9 @@ class LorawanCmd:
            packet.'''
         return self.modem.send_cmd("mac get retx")
 
-    def get_second_rx_window(self):
+    def get_second_rx_window(self, frequency):
         '''Gets the data rate and frequency used for the second Receive window.'''
-        return self.modem.send_cmd("mac get rx2")
+        return self.modem.send_cmd(f"mac get rx2 {frequency}")
 
     def get_rxdelay1(self):
         '''Gets the interval value stored for rxdelay1.'''
