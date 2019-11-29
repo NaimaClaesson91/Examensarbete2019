@@ -10,11 +10,15 @@ class LorawanCmd:
 
     def transmit(self, payload_type, port, data):
         '''Sends the data on specified port with default LoRaWAN parameters.'''
-        return self.modem.send_cmd(f"mac tx {payload_type} {port} {data}")
+        self.modem.send_cmd(f"mac tx {payload_type} {port} {data}")
+
+        return self.modem.await_response()
 
     def join(self, mode):
         '''Attempt to join the network using OTAA or ABP.'''
-        return self.modem.send_cmd(f"mac join {mode}")
+        self.modem.send_cmd(f"mac join {mode}")
+
+        return self.modem.await_response()
 
     def save(self):
         '''Saves LoRaWAN Class A configuration parameters to the user EEPROM.'''
@@ -32,6 +36,10 @@ class LorawanCmd:
     def resume(self):
         '''Restores the LoRaWAN stack functionality.'''
         return self.modem.send_cmd("mac resume")
+
+    def set_adaptive_data_rate(self, state):
+        '''Sets the adaptive data rate on or off.'''
+        return self.modem.send_cmd(f"mac set adr {state}")
 
     def set_app_key(self, app_key):
         '''Sets the application key for the RN2483 module.'''
@@ -109,37 +117,37 @@ class LorawanCmd:
 
     def set_multicast_network_session_key(self, key):
         '''Sets the multicast network session key.'''
-        return self.modem.send_cmd(f"set mcastnwkskey {key}")
+        return self.modem.send_cmd(f"mac set mcastnwkskey {key}")
 
     def set_network_session_key(self, key):
         '''Sets the network session key for the RN2483 module.'''
-        return self.modem.send_cmd(f"set nwkskey {key}")
+        return self.modem.send_cmd(f"mac set nwkskey {key}")
 
     def set_output_power(self, power):
         '''Sets the output power to be used on the next transmissions.'''
-        return self.modem.send_cmd(f"set pwridx {power}")
+        return self.modem.send_cmd(f"mac set pwridx {power}")
 
     def set_retransmissions(self, value):
         '''Sets the number of retransmissions to be used for an uplink confirmed
            package.'''
-        return self.modem.send_cmd(f"set retx {value}")
+        return self.modem.send_cmd(f"mac set retx {value}")
 
     def set_second_rx_window(self, data_rate, frequency):
         '''Sets the data rate and frequency used for the second Receive window.'''
-        return self.modem.send_cmd(f"set rx2 {data_rate} {frequency}")
+        return self.modem.send_cmd(f"mac set rx2 {data_rate} {frequency}")
 
     def set_first_rx_delay(self, delay):
         '''Sets the value used for the first Receive window delay.'''
-        return self.modem.send_cmd(f"set rxdelay1 {delay}")
+        return self.modem.send_cmd(f"mac set rxdelay1 {delay}")
 
     def set_sync_word(self, word):
         '''Sets the synchronization word for the LoRaWAN communication.'''
-        return self.modem.send_cmd(f"set sync {word}")
+        return self.modem.send_cmd(f"mac set sync {word}")
 
     def set_uplink_frame_counter(self, value):
         '''Sets the value of the uplink frame counter that will be used for the
            next uplink transmission.'''
-        return self.modem.send_cmd(f"set upctr {value}")
+        return self.modem.send_cmd(f"mac set upctr {value}")
 
     def get_adaptive_data_rate(self):
         '''Gets the state of adaptive data rate for the device.'''
