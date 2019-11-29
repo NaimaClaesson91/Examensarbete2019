@@ -4,8 +4,10 @@ from sys_cmd import SysCmd
 from lorawan_cmd import LorawanCmd
 from radio_cmd import RadioCmd
 
+
 class Rn2483:
     """Library for RN2483 modules from Microchip."""
+
 
     def __init__(self, port):
         self.ser = serial.Serial()
@@ -19,6 +21,7 @@ class Rn2483:
         self.lorawan = LorawanCmd(self)
         self.radio = RadioCmd(self)
 
+
     def open(self):
         '''Open the serial communication.'''
         try:
@@ -28,9 +31,11 @@ class Rn2483:
 
         return self.ser.name
 
+
     def close(self):
         '''Close the serial communication.'''
         self.ser.close()
+
 
     def send_cmd(self, cmd):
         '''Send command to module and return the response.'''
@@ -38,6 +43,7 @@ class Rn2483:
         response = self.ser.readline().decode("utf-8")
 
         return response
+
 
     def await_response(self):
         '''Await response from the modem.'''
