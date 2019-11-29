@@ -38,3 +38,9 @@ class Rn2483:
         response = self.ser.readline().decode("utf-8")
 
         return response
+
+    def await_response(self):
+        '''Await response from the modem.'''
+        response = self.ser.readline().decode("utf-8")
+
+        return response
