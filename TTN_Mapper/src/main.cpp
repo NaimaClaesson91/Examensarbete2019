@@ -13,18 +13,42 @@ LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 int buttonPin = 8;
 int buttonState = 0;
+double lng = 0;
+double lat = 0;
 
 void displayInfo() {
 
-  Serial.print(F("Location: ")); 
   if (gps.location.isValid()) {
 
-    Serial.print(gps.location.lat(), 6);
-    Serial.print(F(","));
-    Serial.print(gps.location.lng(), 6);
+    lng = gps.location.lng();
+    lat = gps.location.lat();
+
+    Serial.print("Latitude: " + String(gps.location.lat(),6));
+    Serial.print(" Longitude: " + String(gps.location.lng(),6));
+
+    lcd.setCursor(0,0);  // First position, first line
+    lcd.print("LAT: ");
+    lcd.print(lat, 6);
+
+    lcd.setCursor(0,1) ; //Second line, first row
+    lcd.print("LONG: ");
+    lcd.print(lng, 6);
+
+    delay(1000);
+
   } else {
 
     Serial.print(F("INVALID"));
+
+    lcd.setCursor(0,0);  // First position, first line
+    lcd.print("LAT: ");
+    lcd.print(lat, 10);
+
+    lcd.setCursor(0,1) ; //Second line, first row
+    lcd.print("LONG: ");
+    lcd.print(lng, 10);
+    delay(1000);
+
   }
 
   Serial.print(F("  Date/Time: "));
@@ -91,22 +115,21 @@ void displayInfo() {
   pinMode(buttonPin, INPUT_PULLUP); 
   lcd.begin(16,2); 
   ss.begin(GPSBaud);
+  lcd.clear();
+
 }
 
 void loop() {
 
-  lcd.clear();
+  
   //buttonState = digitalRead(buttonPin);
   //checkButton(buttonState); 
-  lcd.print("READY");
-  delay(1000);
 
   while (ss.available() > 0){
 
     if (gps.encode(ss.read())) {
 
         displayInfo();
-        delay(1000);
     }  
 
   if (millis() > 5000 && gps.charsProcessed() < 10) {
