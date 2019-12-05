@@ -2,9 +2,9 @@
 #include <Wire.h>
 #include <LiquidCrystal.h> 
 
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+LiquidCrystal lcd(12, 11, 5, 4, 3, 8);
 
-int buttonPin = 8;
+int buttonPin = 9;
 int buttonState = 0;
 
  void checkButton(int buttonState) {

@@ -4,14 +4,14 @@
 #include <SoftwareSerial.h>
 #include <TinyGPS++.h>
 
-static const int RXPin = 6, TXPin = 5;
+static const int RXPin = A1, TXPin = 0;
 static const uint32_t GPSBaud = 9600;
 TinyGPSPlus gps;
 
 SoftwareSerial ss(RXPin, TXPin);
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+LiquidCrystal lcd(A5, A4, 5, 4, 3, A3);
 
-int buttonPin = 8;
+int buttonPin = A2;
 int buttonState = 0;
 double lng = 0;
 double lat = 0;
