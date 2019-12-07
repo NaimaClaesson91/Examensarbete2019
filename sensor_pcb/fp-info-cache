@@ -1,4 +1,4 @@
-17639275741626686
+17640851372951686
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -78461,6 +78461,13 @@ DO219-AB
 DO219-AB
 0
 2
+2
+sensor_pcb
+SMA_Samtec_SMA-J-P-X-ST-EM1_EdgeMount
+Connector SMA, 0Hz to 20GHz, 50Ohm, Edge Mount (http://suddendocs.samtec.com/prints/sma-j-p-x-st-em1-mkt.pdf)
+SMA Straight Samtec Edge Mount
+0
+5
 2
 sensor_pcb
 lora_logo

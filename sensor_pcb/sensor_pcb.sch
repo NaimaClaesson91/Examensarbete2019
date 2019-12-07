@@ -1206,7 +1206,7 @@ U 1 1 5E7E9FBC
 P 10725 1750
 F 0 "J2" H 10800 1975 50  0000 R CNN
 F 1 "SMA female" H 10800 1875 50  0000 R CNN
-F 2 "Connector_Coaxial:SMA_Samtec_SMA-J-P-X-ST-EM1_EdgeMount" H 10925 1950 60  0001 L CNN
+F 2 "sensor_pcb:SMA_Samtec_SMA-J-P-X-ST-EM1_EdgeMount" H 10925 1950 60  0001 L CNN
 F 3 "http://www.belfuse.com/resources/Johnson/drawings/dr-1420701801.pdf" H 10925 2050 60  0001 L CNN
 F 4 "J502-ND" H 10925 2150 60  0001 L CNN "Digi-Key_PN"
 F 5 "142-0701-801" H 10925 2250 60  0001 L CNN "MPN"

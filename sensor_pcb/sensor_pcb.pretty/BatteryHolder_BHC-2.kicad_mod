@@ -1,4 +1,4 @@
-(module BatteryHolder_BHC-2 (layer F.Cu) (tedit 5DE8CA4B)
+(module BatteryHolder_BHC-2 (layer F.Cu) (tedit 5DEA412F)
   (fp_text reference REF** (at 0 -16.002) (layer F.SilkS)
     (effects (font (size 1 1) (thickness 0.15)))
   )
@@ -27,4 +27,9 @@
   (pad "" np_thru_hole circle (at -17.27 0) (size 3.3 3.3) (drill 3.3) (layers *.Cu *.Mask))
   (pad 1 thru_hole rect (at -27.585 0) (size 3.17 3.17) (drill 1.17) (layers *.Cu *.Mask))
   (pad 2 thru_hole circle (at 27.585 0) (size 3.17 3.17) (drill 1.17) (layers *.Cu *.Mask))
+  (model ":Custom 3D models:BHC-2.STEP"
+    (at (xyz 0 0 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz -90 0 0))
+  )
 )
