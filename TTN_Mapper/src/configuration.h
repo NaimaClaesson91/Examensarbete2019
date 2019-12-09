@@ -1,0 +1,22 @@
+
+#include <lmic.h>
+#include <hal/hal.h>
+#include <SPI.h>
+
+static const PROGMEM u1_t NWKSKEY[16] = { 0x3B, 0xAC, 0x4D, 0xC3, 0xD5, 0x7A, 0xA7, 0x9A, 0xAB, 0x54, 0x0E, 0xDA, 0x3B, 0x64, 0xA1, 0x2A };
+static const u1_t PROGMEM APPSKEY[16] = { 0xBE, 0x35, 0x51, 0x77, 0xF9, 0xCF, 0x92, 0x89, 0x5C, 0x01, 0x07, 0xBF, 0x50, 0xD1, 0xBC, 0x9A };
+static const u4_t DEVADDR = 0x260110D6;
+
+const int RED_BUTTON = 1;
+const int BLUE_BUTTON = 2;
+const int GREEN_BUTTON = 3;
+
+const int RED_LOW = 580;
+const int RED_HIGH = 610;
+
+const int BLUE_LOW = 840;
+const int BLUE_HIGH = 860;
+
+const int GREEN_LOW = 715;
+const int GREEN_HIGH = 735;
+
