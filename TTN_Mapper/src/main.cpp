@@ -240,8 +240,6 @@ void displayInfo() {
 
 void loop() {  
 
-   lcd.clear();
-
    int reading = analogRead(buttonPin);   
    int tmpButtonState = LOW;             // the current reading from the input pin
    
@@ -287,5 +285,6 @@ void loop() {
      break;
           
    }
+   
 }
 
