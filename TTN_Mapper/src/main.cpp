@@ -240,6 +240,8 @@ void displayInfo() {
 
 void loop() {  
 
+   lcd.clear();
+
    int reading = analogRead(buttonPin);   
    int tmpButtonState = LOW;             // the current reading from the input pin
    
@@ -277,13 +279,13 @@ void loop() {
      
      case BLUE_BUTTON:
      Serial.println("BLUE_BUTTON");
-     displayInfo();
+     //displayInfo();
      break;
      
      case GREEN_BUTTON:
-     lcd.print("GREEN BUTTON");
+     Serial.println("GREEN BUTTON");
      break;
-     
+          
    }
 }
 
