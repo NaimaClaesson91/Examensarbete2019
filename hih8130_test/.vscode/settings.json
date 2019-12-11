@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "adc.h": "c"
+        "adc.h": "c",
+        "delay.h": "c",
+        "serial.h": "c"
     }
 }

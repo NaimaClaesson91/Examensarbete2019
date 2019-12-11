@@ -7,6 +7,8 @@
 
 void i2c_init(void) {
 
+    DDRC |= (1 << DDC3);
+
     TWBR = 12;
     TWCR |= (1 << TWEN);
 }
@@ -69,10 +71,14 @@ inline uint8_t i2c_read_NAK(void) {
 
 void read_sensor(uint8_t * humHigh, uint8_t * humLow, uint8_t * tempHigh, uint8_t * tempLow) {
 
+    PORTC |= (1 << PC3); // sensor on
+    _delay_us(500.0); // sensor start-time
+    
     i2c_start();
     i2c_addr(0x27, I2C_W);
     i2c_stop();
-    _delay_ms(100);
+
+    _delay_ms(60);
 
     i2c_start();
     i2c_addr(0x27, I2C_R);
@@ -81,5 +87,7 @@ void read_sensor(uint8_t * humHigh, uint8_t * humLow, uint8_t * tempHigh, uint8_
     *tempHigh = i2c_read_ACK();
     *tempLow = i2c_read_NAK();
     i2c_stop();
+
+    PORTC &= ~(1 << PC3); // sensor off
     
 }

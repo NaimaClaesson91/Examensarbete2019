@@ -8,18 +8,7 @@
 #include "serial.h"
 #include "i2c.h"
 #include "adc.h"
-
-
-typedef struct
-{
-  uint8_t humHigh;
-  uint8_t humLow;
-  uint8_t tempHigh;
-  uint8_t tempLow;
-  uint8_t battStatusHigh;
-  uint8_t battStatusLow;
-
-}loraData_t;
+#include "rn2483.h"
 
 
 int main(void)
@@ -30,17 +19,31 @@ int main(void)
   adc_init();
 
   loraData_t loraData;
-  uint16_t batt;
+
+
+  char hweui[DEV_EUI_LENGTH];
+  const char * app_eui = "";
+  const char * app_key ="";
+  rn2483_auto_baud();
+  _delay_ms(1000);
+
+  rn2483_get_hweui(hweui);
+
+  rn2483_set_freq();
+  rn2483_join_otaa(hweui, app_eui, app_key);
+
+  
+  read_sensor(&loraData.humHigh, &loraData.humLow, &loraData.tempHigh, &loraData.tempLow);
+  adc_battery_sim(&loraData.battStatusHigh, &loraData.battStatusLow);
+  adc_battery_sim(&loraData.battStatusHigh, &loraData.battStatusLow);
+
+  rn2483_transmit_unconfirmed_package(&loraData);
+
+  
 
     while (1) 
     {
 
-      read_sensor(&loraData.humHigh, &loraData.humLow, &loraData.tempHigh, &loraData.tempLow);
-      printf("%d %d %d %d\n", loraData.humHigh, loraData.humLow, loraData.tempHigh, loraData.tempLow);
-
-      batt = adc_battery_sim();
-      printf("Battery: %d\n", batt);
-		   _delay_ms(2000);
 
     }
 }

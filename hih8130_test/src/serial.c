@@ -17,14 +17,28 @@ void uart_init(void) {
 	stdout = &uart_stdout;
 }
 
+void uart_tx_disable(){
+
+	UCSR0B &= ~(1 << TXEN0);
+}
+
+void uart_tx_enable(){
+
+	UCSR0B |= (1 << TXEN0);
+}
+
 int uart_putchar(char chr, FILE *stream) {
-	if (chr == '\n') {
-		uart_putchar('\r', NULL);
-	}
+
 	while (!(UCSR0A & (1 << UDRE0)))
 	;
 	UDR0 = chr;
 	return 0;
+}
+
+void uart_print_char(char chr) {
+	while (!(UCSR0A & (1 << UDRE0)))
+	;
+	UDR0 = chr;	
 }
 
 char uart_getchar(void) {
@@ -40,4 +54,31 @@ void uart_putstr(const char *str){
 		uart_putchar(*str++, NULL);
 	}
 
+}
+
+
+void uart_print(const char * string){
+
+	while(*string != '\0'){
+		uart_print_char(*string);
+		string++;
+	}
+
+	uart_print_char('\r');
+	uart_print_char('\n');
+}
+
+void uart_getstring(char * string, uint8_t max_length){
+
+	int characters = 0;
+	while(characters < (max_length - 1)){
+		string[characters] = uart_getchar();
+
+		if(string[characters] == '\n'){
+			string[++characters] = '\0';
+			break;
+		}
+
+		characters++;
+	}
 }

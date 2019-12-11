@@ -8,18 +8,19 @@
 
 void adc_init(){
 
+    DDRC |= (1 << DDC0);
     ADMUX |= (1 << REFS0) | (1 << MUX0);
 	ADCSRA |= (1 << ADEN) | (1 << ADPS2) | (1 << ADIE);
 
 }
 
 
-uint16_t adc_battery_sim(){
+void adc_battery_sim(uint8_t * battStatusHigh, uint8_t * battStatusLow){
 
-    uint16_t adc_value;
-
-    adc_value = ADCL | ADCH << 8;
+    PORTC |= (1 << PC0); // mosfet on
+    _delay_ms(10); // mosfet start-time
+    *battStatusLow = ADCL;
+    *battStatusHigh = ADCH;
     ADCSRA |= (1 << ADSC);
-
-    return adc_value;
+    PORTC &= ~(1 << PC0); // mosfet off
 }
