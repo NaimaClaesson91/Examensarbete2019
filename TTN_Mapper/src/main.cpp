@@ -14,10 +14,14 @@ LiquidCrystal lcd(A5, A4, 5, 4, 3, A3);
 
 const int buttonPin = A0; 
 
-int buttonState;             
+int buttonState = 0;
+int buttonPresses = 0;                  
 int lastButtonState = LOW;  
 long lastDebounceTime = 0;  
 long debounceDelay = 50;    
+
+int blueButtonCount = 0;
+int *pBlueButtonCount = &blueButtonCount;
 
 double lng = 0;
 double lat = 0;
@@ -39,7 +43,6 @@ const lmic_pinmap lmic_pins = {
     .dio = {2, 6, 7},
 };
 
-
 void do_send(osjob_t* j){
 
     if (LMIC.opmode & OP_TXRXPEND) {
@@ -49,6 +52,68 @@ void do_send(osjob_t* j){
         Serial.println(F("Packet queued"));
     }
 }
+
+void showGPS(int *pBlueButtonCount) {
+
+    switch(*pBlueButtonCount){
+
+      case 1:
+      Serial.println("BLUE 1");
+      break;
+
+      case 2:
+      Serial.println("BLUE 2");
+      break;
+
+      case 3:
+      Serial.println("BLUE 3");
+      *pBlueButtonCount = 0;
+      break;
+         
+    }
+
+    /*
+    
+  while(1){ //while ingen annan knapp är tryckt
+
+    while (ss.available() > 0){
+
+      if (gps.encode(ss.read())) {
+
+        if (gps.location.isValid()) {
+
+          lng = gps.location.lng();
+          lat = gps.location.lat();
+
+          lng = gps.location.lng();
+          lat = gps.location.lat();
+          
+          lcd.setCursor(0,0);  
+          lcd.print("LAT: ");
+          lcd.print(lat, 6);
+
+          lcd.setCursor(0,1) ; 
+          lcd.print("LONG: ");
+          lcd.print(lng, 6);
+
+          Serial.print("Latitude: " + String(gps.location.lat(),6));
+          Serial.print(" Longitude: " + String(gps.location.lng(),6));
+          Serial.println(" ");
+          }  
+
+        if (millis() > 5000 && gps.charsProcessed() < 10) {
+
+          Serial.println(F("No GPS detected: check wiring."));
+          while(true);
+
+          }
+        }
+      }
+    }
+
+    */
+  }
+
 
 void onEvent (ev_t ev) {
 
@@ -120,9 +185,16 @@ void displayInfo() {
 
     lng = gps.location.lng();
     lat = gps.location.lat();
+    //double hdop = gps.hdop.hdop();
+   //float altitude = gps.altitude.meters();
 
-    Serial.print("Latitude: " + String(gps.location.lat(),6));
-    Serial.print(" Longitude: " + String(gps.location.lng(),6));
+    //Serial.print(" HDOP: " + String(hdop));
+    //Serial.print(" Altitude: " + String(altitude));
+
+    //Serial.print("Latitude: " + String(gps.location.lat(),6));
+    //Serial.print(" Longitude: " + String(gps.location.lng(),6));
+//    Serial.print("HDOP: " + gps.hdop.hdop(), gps.hdop.isValid(), 6, 1);
+
 
     lcd.setCursor(0,0);  // First position, first line
     lcd.print("LAT: ");
@@ -235,56 +307,57 @@ void displayInfo() {
 
     LMIC_setDrTxpow(DR_SF7,14);
 
-    do_send(&sendjob);
+    //do_send(&sendjob);
 }
 
 void loop() {  
 
    int reading = analogRead(buttonPin);   
-   int tmpButtonState = LOW;             // the current reading from the input pin
+   int tmpButtonState = LOW;            
    
    if(reading>RED_LOW && reading<RED_HIGH){
      tmpButtonState = RED_BUTTON;
+
      
    } else if(reading>BLUE_LOW && reading<BLUE_HIGH){
      tmpButtonState = BLUE_BUTTON;
+
      
    } else if(reading>GREEN_LOW && reading<GREEN_HIGH){
      tmpButtonState = GREEN_BUTTON;
+
      
-   } else{
-    
-     tmpButtonState = LOW;
-   }
+   } else {tmpButtonState = LOW;}    
+   
 
    if (tmpButtonState != lastButtonState) {
+
      lastDebounceTime = millis();
-   } 
+     lastButtonState = tmpButtonState;
 
-   if ((millis() - lastDebounceTime) > debounceDelay) {
-     buttonState = tmpButtonState;
-     Serial.println(buttonState);
-   }
+    switch(tmpButtonState){
 
-   lastButtonState = tmpButtonState;
-   
-   switch(buttonState){
-    
-     case RED_BUTTON:
-     Serial.println("RED_BUTTON");
-     //os_runloop_once(); 
-     break;
-     
-     case BLUE_BUTTON:
-     Serial.println("BLUE_BUTTON");
-     //displayInfo();
-     break;
-     
-     case GREEN_BUTTON:
-     Serial.println("GREEN BUTTON");
-     break;
+      case RED_BUTTON:
+      Serial.println("RED_BUTTON");
+      //os_runloop_once(); 
+      break;
+
+      case BLUE_BUTTON:
+      blueButtonCount += 1;      
+      showGPS(&blueButtonCount);
+      break;
+
+      case GREEN_BUTTON:
+      Serial.println("GREEN BUTTON");
+      break;
           
+    }
+   } 
+   if ((millis() - lastDebounceTime) > debounceDelay) {  
+
    }
-   
+ 
 }
+
+
 
