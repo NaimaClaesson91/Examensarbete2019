@@ -1,4 +1,4 @@
-update=Fri 13 Dec 2019 09:46:38 AM CET
+update=Fri 13 Dec 2019 12:30:46 PM CET
 version=1
 last_client=kicad
 [general]
@@ -37,7 +37,7 @@ PageLayoutDescrFile=
 PlotDirectoryName=.
 SubpartIdSeparator=0
 SubpartFirstId=65
-NetFmtName=Pcbnew
+NetFmtName=OrcadPCB2
 SpiceAjustPassiveValues=0
 LabSize=79
 ERC_TestSimilarLabels=1
