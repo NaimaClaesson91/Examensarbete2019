@@ -5,7 +5,7 @@
 #include <string.h>
 
 #include "rn2483.h"
-#include "serial.h"
+#include "uart.h"
 
 
 void rn2483_reset(int band){
@@ -22,6 +22,7 @@ void rn2483_auto_baud(void){
 
     // Time break = 13 / baudrate
     _delay_us(1350);
+    PORTD |= (1 << PORTD1);
     uart_tx_enable();
     uart_print_char(0x55);
 }
@@ -43,6 +44,7 @@ void rn2483_set_freq(void){
 
     char frequencies[8][10] = {"867100000", "867300000", "867500000", "867700000", "867900000"};
     rn2483_reset(868);
+    rn2483_wait_for_ok();
 
     for(int channel = 0; channel < 8; channel++){
         rn2483_set_ch_duty_cycle(channel, duty_cycle);
@@ -65,6 +67,7 @@ void rn2483_set_freq(void){
     }
 
     rn2483_set_output_power(1);
+    rn2483_wait_for_ok();
 }
 
 
@@ -98,6 +101,8 @@ void rn2483_transmit_unconfirmed_package(loraData_t * lora_data){
     sprintf(cmd, "mac tx uncnf 1 %02X%02X%02X%02X%02X%02X", lora_data->battStatusHigh, lora_data->battStatusLow, lora_data->humHigh, lora_data->humLow, lora_data->tempHigh, lora_data->tempLow);
     uart_print(cmd);
     rn2483_wait_for_ok();
+    rn2483_wait_for_response();
+    _delay_ms(100);
 }
 
 
@@ -116,8 +121,21 @@ void rn2483_set_ch_freq(int channel, char * frequency){
 
 void rn2483_wait_for_ok(){
     char response[20];
-    uart_getstring(response, 20);
-    _delay_ms(10);
+
+    do{
+        uart_getstring(response, 20);
+    }
+    while(strncmp(response, "ok", 2));
+}
+
+
+void rn2483_wait_for_response(){
+    char response[30];
+
+    do{
+        uart_getstring(response, 30);
+    }
+    while(strncmp(response, "mac_tx", 6));
 }
 
 
@@ -187,5 +205,12 @@ void rn2483_set_sync_word(char * word){
 void rn2483_join(char * mode){
     char cmd[40];
     sprintf(cmd, "mac join %s", mode);
+    uart_print(cmd);
+}
+
+
+void rn2483_sleep(char * sleep_time){
+    char cmd[40];
+    sprintf(cmd, "sys sleep %s", sleep_time);
     uart_print(cmd);
 }

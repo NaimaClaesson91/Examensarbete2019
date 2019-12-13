@@ -10,7 +10,7 @@ void adc_init(){
 
     DDRC |= (1 << DDC0);
     ADMUX |= (1 << REFS0) | (1 << MUX0);
-	ADCSRA |= (1 << ADEN) | (1 << ADPS2) | (1 << ADIE);
+	ADCSRA |= (1 << ADEN) | (1 << ADPS2);// | (1 << ADIE);
 
 }
 

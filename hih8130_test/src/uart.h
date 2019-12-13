@@ -1,5 +1,5 @@
-#ifndef SERIAL_H_
-#define SERIAL_H_
+#ifndef UART_H_
+#define UART_H_
 
 #define BAUDRATE 9600
 #define UBRR (F_CPU/16/BAUDRATE-1)

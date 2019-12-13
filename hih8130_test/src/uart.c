@@ -1,8 +1,7 @@
 #include <avr/io.h>
-
 #include <stdio.h>
 
-#include "serial.h"
+#include "uart.h"
 
 
 static FILE uart_stdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
@@ -30,20 +29,26 @@ void uart_tx_enable(){
 int uart_putchar(char chr, FILE *stream) {
 
 	while (!(UCSR0A & (1 << UDRE0)))
-	;
+	{
+
+	}
 	UDR0 = chr;
 	return 0;
 }
 
 void uart_print_char(char chr) {
 	while (!(UCSR0A & (1 << UDRE0)))
-	;
+	{
+
+	}
 	UDR0 = chr;	
 }
 
 char uart_getchar(void) {
 	while (!(UCSR0A & (1 << RXC0)))
-	;
+	{
+
+	}
 	return UDR0;
 }
 

@@ -5,10 +5,20 @@
 #include <util/delay.h>
 #include <stdio.h>
 
-#include "serial.h"
+#include "uart.h"
 #include "i2c.h"
 #include "adc.h"
 #include "rn2483.h"
+#include "gpio.h"
+#include "snooze.h"
+
+
+ISR(PCINT2_vect)
+{
+    gpio_led_on();
+
+}
+
 
 
 int main(void)
@@ -17,13 +27,17 @@ int main(void)
   uart_init();
   i2c_init();
   adc_init();
+  gpio_init();
 
   loraData_t loraData;
 
 
   char hweui[DEV_EUI_LENGTH];
-  const char * app_eui = "";
-  const char * app_key ="";
+  const char * app_eui = "70B3D57ED0027283";
+  const char * app_key ="86EB1C4101E6DF80D3C4178C4A4BEF4C";
+
+  _delay_ms(1000);
+
   rn2483_auto_baud();
   _delay_ms(1000);
 
@@ -32,18 +46,22 @@ int main(void)
   rn2483_set_freq();
   rn2483_join_otaa(hweui, app_eui, app_key);
 
-  
-  read_sensor(&loraData.humHigh, &loraData.humLow, &loraData.tempHigh, &loraData.tempLow);
   adc_battery_sim(&loraData.battStatusHigh, &loraData.battStatusLow);
-  adc_battery_sim(&loraData.battStatusHigh, &loraData.battStatusLow);
-
-  rn2483_transmit_unconfirmed_package(&loraData);
-
-  
-
     while (1) 
     {
 
+        _delay_ms(100);
+        read_sensor(&loraData.humHigh, &loraData.humLow, &loraData.tempHigh, &loraData.tempLow);
+        adc_battery_sim(&loraData.battStatusHigh, &loraData.battStatusLow);
+
+        rn2483_transmit_unconfirmed_package(&loraData);
+
+        gpio_led_off();
+        rn2483_sleep("600000");
+        _delay_ms(10);
+        snooze_sleep();
+
+        i2c_init();
 
     }
 }
