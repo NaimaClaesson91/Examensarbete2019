@@ -2,3 +2,5 @@
 *.P
 *.elf
 *.lss
+*.hex
+*.map
