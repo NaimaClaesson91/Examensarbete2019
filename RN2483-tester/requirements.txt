@@ -1,8 +1,0 @@
-RN2483
-------
-
-* UART interface are 57600 bps, 8 bits, no parity, 1 Stop bit, no flow control.
-* All commands need to be terminated with <CR><LF>
-* Configuring the device address, network session key and application session key is sufficient for ABP.
-
-* When using ABP you need to set the RX2 parameters to SF9, 869.525MHz if you are using TTN and want to be able to receive downlinks.

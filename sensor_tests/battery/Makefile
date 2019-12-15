@@ -1,5 +1,6 @@
-BIN=sleep-test
+BIN=battery
 MCU=atmega328p
+FREQ=8000000UL
 
 CC=avr-gcc
 OPTIMIZE=-Os
@@ -7,7 +8,7 @@ OBJCOPY=avr-objcopy
 OBJDUMP=avr-objdump
 AVRSIZE=avr-size --format=avr --mcu=$(MCU)
 
-CFLAGS=${OPTIMIZE} -DF_CPU=16000000UL -mmcu=${MCU} -std=gnu99 -Wall -Wextra \
+CFLAGS=${OPTIMIZE} -DF_CPU=${FREQ} -mmcu=${MCU} -std=gnu99 -Wall -Wextra \
 				-Werror -Wstrict-prototypes -Wundef -pedantic
 LDFLAGS=-mmcu=$(MCU)
 PORT=/dev/ttyACM0
@@ -15,8 +16,8 @@ PORT=/dev/ttyACM0
 OUT=${BIN}.elf ${BIN}.hex ${BIN}.lss
 
 SOURCES=main.c \
-		gpio.c \
-		uart.c
+		adc.c \
+		serial.c
 
 OBJS=$(SOURCES:.c=.o)
 
@@ -41,7 +42,7 @@ $(OBJS): Makefile
 	$(OBJCOPY) -O ihex -R .fuse -R .lock -R .user_signatures -R .comment $< $@
 
 flash: ${BIN}.hex
-		avrdude -v -c arduino -p ${MCU} -P ${PORT} -b 115200 -U flash:w:$<
+		avrdude -v -c avrisp2 -p ${MCU} -P ${PORT} -U flash:w:$<
 
 clean:
 		rm -f $(OUT) $(OBJS) *.map *.P

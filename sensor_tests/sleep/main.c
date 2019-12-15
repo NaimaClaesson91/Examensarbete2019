@@ -26,6 +26,7 @@ int main(void)
     while(1)
     {
         gpio_led_off();
+        gpio_sleep();
         sleep();
         _delay_ms(5000);
     }
@@ -41,34 +42,44 @@ void sleep(void)
     // Disable the ADC.
     ADCSRA &= ~(1 << ADEN);
 
+    // Disable UART RX and TX.
+    UCSR0B &= ~((1 << RXEN0) | (1 << TXEN0));
+
     // Enable pin change interrupt on PCINT16 (PD0/UART RX).
     PCMSK2 |= (1 << PCINT16);
-
-    // Enable pin change interrupt 2 (PCINT 23 to 16).
+    PCIFR  |= bit (PCIF2);
     PCICR |= (1 << PCIE2);
 
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+    power_adc_disable();
+    power_spi_disable();
     power_twi_disable();
-    power_timer2_disable();
     power_timer0_disable();
     power_timer1_disable();
-    power_spi_disable();
-    power_adc_disable();
+    power_timer2_disable();
 
-    // Disable UART RX and TX.
-    UCSR0B &= ~((1 << RXEN0) | (1 << TXEN0));
+    // Turn off Brown-Out Detection.
+    MCUCR |= ((1 << BODS) | (1 << BODSE));
+    MCUCR |= (1 << BODS);
 
     sleep_enable();
     sei();
     sleep_cpu();
-    // Sleeping...
+    // Sleeping.
 
-    // Waking up when detecting RX activity.
-    sleep_disable();
-    power_all_enable();
 
-    // Disable pin change interrupt 2 (PCINT 23 to 16).
+
+    // Waking up.
+    cli();
+
+    // Disable pin change interrupt 2 (RX-pin).
     PCICR &= ~(1 << PCIE2);
+    PCMSK2 &= ~(1 << PCINT16);
+
+    sleep_disable();
+    power_twi_enable();
+    power_adc_enable();
+
 
     // Enable UART RX and TX.
     UCSR0B |= ((1 << RXEN0) | (1 << TXEN0));
