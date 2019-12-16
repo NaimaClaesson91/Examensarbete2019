@@ -26,7 +26,7 @@ int main(void)
         adc_battery(&data.voltageHigh, &data.voltageLow);
         voltage = (data.voltageHigh << 8) + (data.voltageLow);
 
-        sprintf(string, "Voltage: %04X\r\n", voltage);
+        sprintf(string, "Voltage: %d\r\n", voltage);
         uart_print(string);
 
         _delay_ms(5000);

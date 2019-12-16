@@ -13,7 +13,7 @@ Blinks the LED (0.5 Hz) on the board to ensure that the microcontroller is runni
 ### HIH6131
 Turns on the sensor and takes a temperature and humidity measurement over the I2C bus, and then print the result on the UART.
 ```
-Temperature = ((TEMP_VALUE/16382) * 165) - 14
+Temperature = ((TEMP_VALUE/16382) * 165) - 40
 Humidity = (HUM_VALUE/16382) * 100
 ```
 
