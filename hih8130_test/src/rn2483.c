@@ -6,6 +6,7 @@
 
 #include "rn2483.h"
 #include "uart.h"
+#include "snooze.h"
 
 
 void rn2483_reset(int band){
@@ -72,6 +73,7 @@ void rn2483_set_freq(void){
 
 
 void rn2483_join_otaa(char * dev_eui, char * app_eui, char * app_key){
+    
     rn2483_set_device_eui(dev_eui);
     rn2483_wait_for_ok();
 
@@ -92,6 +94,8 @@ void rn2483_join_otaa(char * dev_eui, char * app_eui, char * app_key){
 
     rn2483_join("otaa");
     rn2483_wait_for_ok();
+    rn2483_wait_for_join_response();
+
     _delay_ms(7000);
 }
 
@@ -101,7 +105,7 @@ void rn2483_transmit_unconfirmed_package(loraData_t * lora_data){
     sprintf(cmd, "mac tx uncnf 1 %02X%02X%02X%02X%02X%02X", lora_data->battStatusHigh, lora_data->battStatusLow, lora_data->humHigh, lora_data->humLow, lora_data->tempHigh, lora_data->tempLow);
     uart_print(cmd);
     rn2483_wait_for_ok();
-    rn2483_wait_for_response();
+    rn2483_wait_for_tx_response();
     _delay_ms(100);
 }
 
@@ -129,13 +133,62 @@ void rn2483_wait_for_ok(){
 }
 
 
-void rn2483_wait_for_response(){
+void rn2483_wait_for_tx_response(){
     char response[30];
 
     do{
         uart_getstring(response, 30);
     }
     while(strncmp(response, "mac_tx", 6));
+}
+
+
+void rn2483_wait_for_join_response(){
+    
+    char response[30];
+    static uint8_t join_attempts = 0;
+    uart_getstring(response, 30);
+
+    if(join_attempts >= 10){
+        
+        for(int i = 0; i < 5; i++){
+            gpio_led_on();
+            _delay_ms(1000);
+            gpio_led_off();
+            _delay_ms(1000);
+        }
+
+        rn2483_sleep("4294967295");
+        _delay_ms(10);
+        snooze_shut_down();
+        _delay_ms(100);
+        return;     
+
+    }
+    else if(strncmp(response, "denied", 6) == 0){
+        gpio_led_on();
+        _delay_ms(100); //not joined blink
+        gpio_led_off();
+
+        _delay_ms(10000);
+        rn2483_join("otaa");
+        rn2483_wait_for_ok();
+        
+        join_attempts++;
+        rn2483_wait_for_join_response();
+        
+    }
+    else if(strncmp(response, "accepted", 8) == 0){
+        for(int i = 0; i < 3; i++){
+            gpio_led_on();
+            _delay_ms(100); //joined blink
+            gpio_led_off();
+            _delay_ms(500);
+        }
+
+        return;
+    }
+    
 }
 
 

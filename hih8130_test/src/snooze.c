@@ -56,3 +56,30 @@ void snooze_sleep(void)
     UCSR0B |= ((1 << RXEN0) | (1 << TXEN0));
 
 }
+
+
+void snooze_shut_down(){
+        // Disable global interrupts.
+    cli();
+
+    // Disable the ADC.
+    ADCSRA &= ~(1 << ADEN);
+
+    set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+    power_twi_disable();
+    power_timer2_disable();
+    power_timer0_disable();
+    power_timer1_disable();
+    power_spi_disable();
+    power_adc_disable();
+
+    // Disable UART RX and TX.
+    UCSR0B &= ~((1 << RXEN0) | (1 << TXEN0));
+    DDRD &= ~(1 << DDD1);
+    PORTD |= (1 << PD1);
+
+    sleep_enable();
+
+    sleep_cpu();
+    // Sleeping...
+}

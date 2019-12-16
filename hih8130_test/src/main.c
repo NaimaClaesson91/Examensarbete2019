@@ -30,11 +30,13 @@ int main(void)
   gpio_init();
 
   loraData_t loraData;
-
+  gpio_led_on();
+  _delay_ms(100); //start blink
+  gpio_led_off();
 
   char hweui[DEV_EUI_LENGTH];
-  const char * app_eui = "70B3D57ED0027283";
-  const char * app_key ="86EB1C4101E6DF80D3C4178C4A4BEF4C";
+  const char * app_eui = "";
+  const char * app_key ="";
 
   _delay_ms(1000);
 

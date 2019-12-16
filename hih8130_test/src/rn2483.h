@@ -50,7 +50,9 @@ void rn2483_join(char * mode);
 
 void rn2483_wait_for_ok(void);
 
-void rn2483_wait_for_response(void);
+void rn2483_wait_for_tx_response(void);
+
+void rn2483_wait_for_join_response(void);
 
 void rn2483_sleep(char * sleep_time);
 
