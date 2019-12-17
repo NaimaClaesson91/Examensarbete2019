@@ -7,6 +7,7 @@
 #include "rn2483.h"
 #include "uart.h"
 #include "snooze.h"
+#include "gpio.h"
 
 
 void rn2483_reset(int band){
@@ -33,7 +34,8 @@ void rn2483_get_hweui(char * hweui){
 
     uart_print("sys get hweui");
     uart_getstring(hweui, DEV_EUI_LENGTH);
-
+    size_t length = strlen(hweui);
+    hweui[length-2] = '\0'; // remove \r\n
 }
 
 
@@ -150,7 +152,7 @@ void rn2483_wait_for_join_response(){
     uart_getstring(response, 30);
 
     if(join_attempts >= 10){
-        
+
         for(int i = 0; i < 5; i++){
             gpio_led_on();
             _delay_ms(1000);

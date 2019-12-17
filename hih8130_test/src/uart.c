@@ -75,7 +75,7 @@ void uart_print(const char * string){
 
 void uart_getstring(char * string, uint8_t max_length){
 
-	int characters = 0;
+	uint8_t characters = 0;
 	while(characters < (max_length - 1)){
 		string[characters] = uart_getchar();
 

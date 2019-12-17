@@ -3,7 +3,7 @@
 
 void snooze_sleep(void);
 
-snooze_shut_down(void);
+void snooze_shut_down(void);
 
 
 #endif

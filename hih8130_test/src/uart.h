@@ -1,8 +1,9 @@
 #ifndef UART_H_
 #define UART_H_
+#define F_CPU_ 8000000
 
 #define BAUDRATE 9600
-#define UBRR (F_CPU/16/BAUDRATE-1)
+#define UBRR (F_CPU_/16/BAUDRATE-1)
 
 void uart_init(void);
 

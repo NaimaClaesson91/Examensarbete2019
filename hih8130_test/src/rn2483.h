@@ -1,7 +1,7 @@
 #ifndef _RN2483_H_
 #define _RN2483_H_
 
-#define DEV_EUI_LENGTH 20
+#define DEV_EUI_LENGTH 30
 
 typedef struct
 {
