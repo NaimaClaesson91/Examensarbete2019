@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "adc.h": "c",
+        "delay.h": "c",
+        "serial.h": "c",
+        "power.h": "c",
+        "pgmspace.h": "c"
+    }
+}

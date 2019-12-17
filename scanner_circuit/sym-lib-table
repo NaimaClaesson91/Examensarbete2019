@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name scanner_components)(type Legacy)(uri ${KIPRJMOD}/scanner_components.lib)(options "")(descr ""))
+  (lib (name scanner_circuit-rescue)(type Legacy)(uri ${KIPRJMOD}/scanner_circuit-rescue.lib)(options "")(descr ""))
 )
